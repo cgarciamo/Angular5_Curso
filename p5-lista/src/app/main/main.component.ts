@@ -4,9 +4,9 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-main',
   template:` <div class="container">
   <article class="row alto">
-    <app-tareas class="col"></app-tareas>
+    <app-tareas class="col-12"></app-tareas>
 
-    <app-acumulador class="col"></app-acumulador>
+    <app-pipes class="col-12"></app-pipes>
 
   </article>
  </div>`,

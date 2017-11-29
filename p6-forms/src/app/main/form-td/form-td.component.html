@@ -1,0 +1,104 @@
+
+<header class="col-12">
+    <h2>Formulario tradicional - template driven</h2>
+</header>
+
+<form novalidate #formTD="ngForm" (ngSubmit)="enviarForm()">
+  <!--Text-->  
+  <fieldset>
+      <legend>Datos del Usuario</legend>
+      <div class="form-group row">
+          <!--Etiqueta / Campo "Mombre"-->						
+          <label for="name" class="col-3">Nombre</label>
+          <input type="text" class="form-control col-9" 
+          name="name" id="name" required minlength="3" 
+          placeholder="Indica tu nombre (es obligatorio)" [(ngModel)]="oUsuario.nombre" #nameSate="ngModel">
+      </div>
+
+      <div [hidden]="nameSate.untouched || nameSate.valid">
+          <p [hidden]="!nameSate.errors?.required"
+        >Campo obligatorio</p>
+          <p [hidden]="!nameSate.errors?.minlength"
+        >Campo debe tener al menos 3 caracteres</p>
+      </div>
+
+      <div class="form-group row">
+          <!--Etiqueta / Campo "Apellidos"-->
+          <label for="lastname"  class="col-3">Apellidos</label>
+          <input type="text" class="form-control col-9"
+          id="lastname" name="lastname" required
+          placeholder="Indica tu apellido (es obligatorio)" [(ngModel)]="oUsuario.apellidos">
+      </div>      
+      <div class="form-group row">
+          <!--Etiqueta / Campo "Telefono"-->
+          <label for="phoneNumber" class="col-3">Teléfono</label>
+          <input type="text" class="form-control col-9"
+          id="phoneNumber" name="phoneNumber" required pattern="^\d{9}$"
+          placeholder="Indica tu teléfono (es obligatorio)" [(ngModel)]="oUsuario.telefono"> 
+      </div>
+  </fieldset>  
+
+  <!--Radio-Buttos-->
+  <fieldset class="form-group">
+      <legend>Selecciona una Impresora</legend>
+          <div *ngFor="let print of aImpresoras" class="form-check">
+              <label class="form-check-label">
+                  <input type="radio" class="form-check-input"
+                      name ="printer" id="{{'pr' + print.id}}" 
+                      [value]="print" [(ngModel)]="oImpresora">
+                      {{print.nombre}}
+              </label>
+          </div>
+  </fieldset>
+
+  <!--Checkbox-->   
+  <fieldset class="form-group"> 
+      <legend>Seleción de opciones</legend>
+      <div class="form-check">
+          <label class="form-check-label">
+          <input type="checkbox"  class="form-check-input"
+              id="color" name="color" [(ngModel)]="isColor">
+              Imprimir en color
+          </label>
+      </div>
+      <div class="form-check">
+          <label class="form-check-label">
+          <input type="checkbox"  class="form-check-input"
+              id="tono" name="tono" [(ngModel)]="isClaro"> 
+              Tono claro</label>			
+      </div>
+  </fieldset>
+  <!--Select/options --> 
+  <fieldset class="form-group"> 
+      <legend>Departameto</legend>
+      <div class="form-group row">
+          <select class="form-control"
+              id="select" name="select" [(ngModel)]="oDepartamento"> 
+              <option *ngFor="let dpto of aDepartamentos" [ngValue]="dpto">{{dpto.nombre}}</option>
+          </select>
+      </div>
+  </fieldset>
+  <div class="form-group row">
+      <button type="submit" class="btn btn-primary mr-2"
+      [disabled]="formTD.invalid">
+          Enviar</button>
+      <button type="button" class="btn btn-primary" (click)="borrarForm()" [disabled]="formTD.pristine">
+          Borrar</button>
+  </div>
+</form>
+
+<div class="row">
+<h4>Resultados</h4>
+<p>{{oUsuario | json}}</p>
+<p>{{isColor}}</p>
+<p>{{isClaro}}</p>
+<p>{{oDepartamento | json}}</p>
+<p>Impresora {{oImpresora | json}}</p>
+
+<h5>Datos de validación</h5>
+<p>Untouched {{formTD.untouched}}</p>
+<p>Uso pristine {{formTD.pristine}}</p>
+<p>Formulario válido: {{formTD.valid}}</p>
+</div>
+
+

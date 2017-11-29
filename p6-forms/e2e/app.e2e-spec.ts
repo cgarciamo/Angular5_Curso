@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('p2-modulos App', () => {
+describe('p6-forms App', () => {
   let page: AppPage;
 
   beforeEach(() => {
