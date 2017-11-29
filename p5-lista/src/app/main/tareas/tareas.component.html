@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header">
+    <h3>Tareas</h3>
+  </div>
+
+  <div class="card-body">
+      <div class="form-group">
+        <label for="nombre">Escribe una tarea</label>
+        <input type="text" [(ngModel)]="sTarea"
+          class="form-control" name="tarea" id="tarea">
+      </div>
+
+      <button class="btn btn-primary" (click)="addTareas()">
+        Add
+      </button>
+
+      <div *ngIf="aTareas.length"
+      class="card-footer text-muted">
+        <h4>Lista de tareas</h4>
+        <ul>
+        <li *ngFor="let tarea of aTareas; let i = index">{{tarea}} ({{i+1}})
+          <button class="btn-sm btn-danger"
+          (click)="borrar(i)">Eliminar</button>
+        </li>
+        </ul>
+    </div>
+  </div>
+</div>
