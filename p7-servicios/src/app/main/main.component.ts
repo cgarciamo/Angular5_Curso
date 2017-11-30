@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-main',
   template: `
-    <p class="alto text-center">
-      main works!
-    </p>
+  <div class="container">
+    <article class="row alto">
+    <app-mock-libros></app-mock-libros>
+    </article>
+  </div>
   `,
   styles: [
     '.alto{min-height: 10rem}'
